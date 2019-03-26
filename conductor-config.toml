@@ -9,7 +9,7 @@ key_file = "../../../keyfile.txt"
 #---------[ hApps ]-----------
 
 [[dnas]]
-file = "../../../dist/threaded_comments.dna.json"
+file = "../../dist/zomes.dna.json"
 hash = ""
 id = "threaded_comments"
 
