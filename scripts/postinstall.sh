@@ -24,6 +24,7 @@ rustup override set nightly-2019-02-04
 # install rust deps
 rustup target add wasm32-unknown-unknown
 rustup component add clippy
+cargo install cargo-watch
 # install Holochain CLI and runtime at known compatible version
 cargo install hc --git https://github.com/holochain/holochain-rust.git --tag $HDK_RUST_REVID
 cargo install holochain --git https://github.com/holochain/holochain-rust.git --tag $HDK_RUST_REVID
