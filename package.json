@@ -1,0 +1,29 @@
+{
+  "name": "holo-threaded-comments",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Threaded comments hApp for generic comment functionality in Holochain",
+  "main": "/dev/null",
+  "scripts": {
+    "postinstall": "scripts/postinstall.sh",
+    "build": "hc package",
+    "start": "holochain -c ./conductor-config.toml",
+    "test": "cargo clippy; npm run build; cargo test && node test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/pospi/holo-threaded-comments.git"
+  },
+  "keywords": [
+    "Holochain",
+    "comments",
+    "zome",
+    "microservice"
+  ],
+  "author": "pospi <pospi@spadgos.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pospi/holo-threaded-comments/issues"
+  },
+  "homepage": "https://github.com/pospi/holo-threaded-comments#readme"
+}
