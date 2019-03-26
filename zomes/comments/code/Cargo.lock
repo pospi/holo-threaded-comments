@@ -242,18 +242,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "holo-comments"
-version = "0.1.0"
-dependencies = [
- "hdk 0.0.8-alpha (git+https://github.com/holochain/holochain-rust?tag=v0.0.8-alpha)",
- "holochain_core_types_derive 0.0.8-alpha (git+https://github.com/holochain/holochain-rust?tag=v0.0.8-alpha)",
- "holochain_wasm_utils 0.0.8-alpha (git+https://github.com/holochain/holochain-rust?tag=v0.0.8-alpha)",
- "serde 1.0.89 (registry+https://github.com/rust-lang/crates.io-index)",
- "serde_derive 1.0.89 (registry+https://github.com/rust-lang/crates.io-index)",
- "serde_json 1.0.39 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
 name = "holochain_core_types"
 version = "0.0.8-alpha"
 source = "git+https://github.com/holochain/holochain-rust?tag=v0.0.8-alpha#0652f1f4dde9dc085218e960ac0d91e6223daac6"
@@ -615,6 +603,18 @@ version = "0.3.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "lazy_static 1.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "threaded_comments"
+version = "0.1.0"
+dependencies = [
+ "hdk 0.0.8-alpha (git+https://github.com/holochain/holochain-rust?tag=v0.0.8-alpha)",
+ "holochain_core_types_derive 0.0.8-alpha (git+https://github.com/holochain/holochain-rust?tag=v0.0.8-alpha)",
+ "holochain_wasm_utils 0.0.8-alpha (git+https://github.com/holochain/holochain-rust?tag=v0.0.8-alpha)",
+ "serde 1.0.89 (registry+https://github.com/rust-lang/crates.io-index)",
+ "serde_derive 1.0.89 (registry+https://github.com/rust-lang/crates.io-index)",
+ "serde_json 1.0.39 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
