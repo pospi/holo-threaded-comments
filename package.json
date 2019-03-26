@@ -6,7 +6,7 @@
   "main": "/dev/null",
   "scripts": {
     "postinstall": "scripts/postinstall.sh",
-    "build": "cd zomes; hc package",
+    "build": "hc package",
     "start": "cd zomes/comments/code; holochain -c ../../../conductor-config.toml",
     "test": "cargo clippy; npm run build; cargo test && node test/index.js"
   },
