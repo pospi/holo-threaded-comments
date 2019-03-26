@@ -9,6 +9,7 @@ extern crate serde_json;
 mod comment_entry;
 
 use hdk::{
+    AGENT_ADDRESS,
     entry_definition::ValidatingEntryType,
     error::ZomeApiResult,
 };
@@ -22,12 +23,20 @@ use hdk::holochain_core_types::{
 
 use comment_entry::{
     COMMENT_ENTRY_TYPE,
-    Comment
+    CommentData,
+    Comment,
+    comment_from_input,
 };
 
-pub fn handle_create_comment(entry: Comment) -> ZomeApiResult<Address> {
-    let entry = Entry::App(COMMENT_ENTRY_TYPE.into(), entry.into());
+pub fn handle_create_comment(entry: CommentData) -> ZomeApiResult<Address> {
+    // create and store the comment
+    let entry = Entry::App(COMMENT_ENTRY_TYPE.into(), comment_from_input(
+        entry,
+        AGENT_ADDRESS.to_string().into()
+    ).into());
     let address = hdk::commit_entry(&entry)?;
+
+    // return address
     Ok(address)
 }
 
@@ -59,7 +68,7 @@ define_zome! {
 
     functions: [
         create_comment: {
-            inputs: |comment: Comment|,
+            inputs: |comment: CommentData|,
             outputs: |result: ZomeApiResult<Address>|,
             handler: handle_create_comment
         }

@@ -14,10 +14,28 @@ use hdk::holochain_core_types::{
     json::JsonString,
 };
 
+// comment type and entry format
+
 pub const COMMENT_ENTRY_TYPE: &str = "comment";
+
+#[derive(Serialize, Deserialize, Debug, DefaultJson, Clone)]
+pub struct CommentData {
+    base: Address,
+    content: String,
+}
 
 #[derive(Serialize, Deserialize, Debug, DefaultJson, Clone)]
 pub struct Comment {
     base: Address,
+    author: Address,
     content: String,
+}
+
+/// Converts an input comment (without author) into a comment entry for saving to the DHT
+pub fn comment_from_input(data: CommentData, author: Address) -> Comment {
+    Comment{
+        base: data.base.into(),
+        content: data.content.into(),
+        author,
+    }
 }
