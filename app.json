@@ -1,9 +1,9 @@
 {
-  "name": "Holochain App Name",
-  "description": "A Holochain app",
+  "name": "Threaded comments",
+  "description": "App-agnostic service for commenting on other records (including other comments)",
   "authors": [
     {
-      "identifier": "Author Name <author@name.com>",
+      "identifier": "pospi <pospi@spadgos.com>",
       "public_key_source": "",
       "signature": ""
     }
