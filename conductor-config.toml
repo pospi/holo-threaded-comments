@@ -19,7 +19,7 @@ dna = "threaded_comments"
 id = "test_instance1"
 
   [instances.storage]
-  path = "data"
+  path = "hcdata"
   type = "file"
 
 #---------[ gateway interfaces ]-----------
