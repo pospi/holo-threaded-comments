@@ -32,11 +32,13 @@ pub struct Comment {
 }
 
 /// Converts an input comment (without author) into a comment entry for saving to the DHT
-pub fn comment_from_input(data: CommentData, author: Address) -> Comment {
-    Comment{
-        base: data.base.into(),
-        content: data.content.into(),
-        author,
+impl CommentData {
+    pub fn with_author(&self, author: Address) -> Comment {
+        Comment{
+            base: self.base.clone(),
+            content: self.content.clone(),
+            author,
+        }
     }
 }
 

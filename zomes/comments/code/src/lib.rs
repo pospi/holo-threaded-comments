@@ -25,7 +25,6 @@ use comment_entry::{
     COMMENT_ENTRY_TYPE,
     CommentData,
     Comment,
-    comment_from_input,
     BASE_ENTRY_TYPE,
     COMMENT_LINK_TAG,
     Base,
@@ -33,10 +32,12 @@ use comment_entry::{
 
 pub fn handle_create_comment(input_entry: CommentData) -> ZomeApiResult<Address> {
     // create and store the comment
-    let entry = Entry::App(COMMENT_ENTRY_TYPE.into(), comment_from_input(
-        input_entry.clone(),
-        AGENT_ADDRESS.to_string().into()
-    ).into());
+    let entry = Entry::App(
+        COMMENT_ENTRY_TYPE.into(),
+        input_entry.with_author(
+            AGENT_ADDRESS.to_string().into()
+        ).into()
+    );
     let address = hdk::commit_entry(&entry)?;
 
     // store an entry for the ID of the base object the comment was made on
