@@ -8,10 +8,22 @@
 
 use holochain_core_types_derive::{ DefaultJson };
 
+use hdk::{
+    AGENT_ADDRESS,
+    entry_definition::ValidatingEntryType,
+    error::ZomeApiResult,
+};
 use hdk::holochain_core_types::{
     cas::content::Address,
+    entry::Entry,
+    dna::entry_types::Sharing,
     error::HolochainError,
     json::JsonString,
+};
+
+use super::base_entry::{
+    BASE_ENTRY_TYPE,
+    COMMENT_LINK_TAG,
 };
 
 // comment type and entry format
@@ -42,12 +54,49 @@ impl CommentData {
     }
 }
 
-// record type for base entries
+// API methods
 
-pub const BASE_ENTRY_TYPE: &str = "base";
+pub fn handle_create_comment(input_entry: CommentData) -> ZomeApiResult<Address> {
+    // create and store the comment
+    let entry = Entry::App(
+        COMMENT_ENTRY_TYPE.into(),
+        input_entry.with_author(
+            AGENT_ADDRESS.to_string().into()
+        ).into()
+    );
+    let address = hdk::commit_entry(&entry)?;
 
-pub type Base = String;
+    // store an entry for the ID of the base object the comment was made on
+    let base_entry = Entry::App(BASE_ENTRY_TYPE.into(), input_entry.base.into());
+    let base_address = hdk::commit_entry(&base_entry)?;
 
-// tag for links from base to comment
+    // link the comment to its originating thing
+    hdk::link_entries(
+        &base_address,
+        &address,
+        COMMENT_LINK_TAG,
+    )?;
 
-pub const COMMENT_LINK_TAG: &str = "commented_on";
+    // return address
+    Ok(address)
+}
+
+pub fn handle_get_comment(address: Address) -> ZomeApiResult<Option<Entry>> {
+    hdk::get_entry(&address)
+}
+
+// Entry definition
+
+pub fn comment_def() -> ValidatingEntryType {
+    entry!(
+        name: COMMENT_ENTRY_TYPE,
+        description: "A comment made against some other resource from elsewhere",
+        sharing: Sharing::Public,
+        validation_package: || {
+            hdk::ValidationPackageDefinition::Entry
+        },
+        validation: | _validation_data: hdk::EntryValidationData<Comment>| {
+            Ok(())
+        }
+    )
+}
