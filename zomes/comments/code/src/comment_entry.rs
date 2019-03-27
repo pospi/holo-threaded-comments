@@ -20,13 +20,13 @@ pub const COMMENT_ENTRY_TYPE: &str = "comment";
 
 #[derive(Serialize, Deserialize, Debug, DefaultJson, Clone)]
 pub struct CommentData {
-    base: Address,
-    content: String,
+    pub base: String,
+    pub content: String,
 }
 
 #[derive(Serialize, Deserialize, Debug, DefaultJson, Clone)]
 pub struct Comment {
-    base: Address,
+    base: String,
     author: Address,
     content: String,
 }

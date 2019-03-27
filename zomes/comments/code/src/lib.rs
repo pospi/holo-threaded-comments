@@ -28,10 +28,10 @@ use comment_entry::{
     comment_from_input,
 };
 
-pub fn handle_create_comment(entry: CommentData) -> ZomeApiResult<Address> {
+pub fn handle_create_comment(input_entry: CommentData) -> ZomeApiResult<Address> {
     // create and store the comment
     let entry = Entry::App(COMMENT_ENTRY_TYPE.into(), comment_from_input(
-        entry,
+        input_entry.clone(),
         AGENT_ADDRESS.to_string().into()
     ).into());
     let address = hdk::commit_entry(&entry)?;
