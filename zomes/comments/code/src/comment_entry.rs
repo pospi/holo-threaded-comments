@@ -6,6 +6,8 @@
  * @since:   2019-03-26
  */
 
+use std::time::{ SystemTime };
+
 use holochain_core_types_derive::{ DefaultJson };
 
 use hdk::{
@@ -16,6 +18,7 @@ use hdk::{
 use hdk::holochain_core_types::{
     cas::content::Address,
     entry::Entry,
+    time::Iso8601,
     dna::entry_types::Sharing,
     error::HolochainError,
     json::JsonString,
@@ -34,6 +37,7 @@ pub const COMMENT_ENTRY_TYPE: &str = "comment";
 pub struct CommentData {
     pub base: String,
     pub content: String,
+    pub timestamp: Iso8601,
 }
 
 #[derive(Serialize, Deserialize, Debug, DefaultJson, Clone)]
@@ -41,6 +45,7 @@ pub struct Comment {
     base: String,
     author: Address,
     content: String,
+    timestamp: Iso8601,
 }
 
 /// Converts an input comment (without author) into a comment entry for saving to the DHT
@@ -49,6 +54,7 @@ impl CommentData {
         Comment{
             base: self.base.clone(),
             content: self.content.clone(),
+            timestamp: self.timestamp.clone(),
             author,
         }
     }
