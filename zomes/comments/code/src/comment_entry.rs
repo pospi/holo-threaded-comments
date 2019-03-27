@@ -39,3 +39,13 @@ pub fn comment_from_input(data: CommentData, author: Address) -> Comment {
         author,
     }
 }
+
+// record type for base entries
+
+pub const BASE_ENTRY_TYPE: &str = "base";
+
+pub type Base = String;
+
+// tag for links from base to comment
+
+pub const COMMENT_LINK_TAG: &str = "commented_on";
