@@ -14,13 +14,13 @@ use hdk::{
 };
 use hdk::holochain_core_types::{
     cas::content::Address,
-    entry::Entry,
     error::HolochainError,
     json::JsonString,
 };
 
 use comment_entry::{
     CommentData,
+    Comment,
     comment_def,
     handle_create_comment,
     handle_get_comment,
@@ -46,12 +46,12 @@ define_zome! {
         }
         get_comment: {
             inputs: |address: Address|,
-            outputs: |result: ZomeApiResult<Option<Entry>>|,
+            outputs: |result: ZomeApiResult<Comment>|,
             handler: handle_get_comment
         }
         get_child_comments: {
             inputs: |address: String|,
-            outputs: |result: ZomeApiResult<Vec<ZomeApiResult<Option<Entry>>>>|,
+            outputs: |result: ZomeApiResult<Vec<Comment>>|,
             handler: handle_get_children
         }
     ]

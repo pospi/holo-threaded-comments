@@ -6,14 +6,13 @@
  * @since:   2019-03-26
  */
 
-use std::time::{ SystemTime };
-
 use holochain_core_types_derive::{ DefaultJson };
 
 use hdk::{
     AGENT_ADDRESS,
     entry_definition::ValidatingEntryType,
     error::ZomeApiResult,
+    utils::get_as_type,
 };
 use hdk::holochain_core_types::{
     cas::content::Address,
@@ -87,8 +86,8 @@ pub fn handle_create_comment(input_entry: CommentData) -> ZomeApiResult<Address>
     Ok(address)
 }
 
-pub fn handle_get_comment(address: Address) -> ZomeApiResult<Option<Entry>> {
-    hdk::get_entry(&address)
+pub fn handle_get_comment(address: Address) -> ZomeApiResult<Comment> {
+    get_as_type(address)
 }
 
 // Entry definition
