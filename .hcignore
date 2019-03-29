@@ -10,3 +10,5 @@ conductor-config.toml
 keyfile.txt
 package-lock.json
 package.json
+Cargo.lock
+Cargo.toml
