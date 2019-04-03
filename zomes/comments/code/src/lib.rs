@@ -27,7 +27,7 @@ use comment_entry::{
 };
 use base_entry::{
     base_def,
-    handle_get_children,
+    handle_get_comments,
 };
 
 define_zome! {
@@ -49,10 +49,10 @@ define_zome! {
             outputs: |result: ZomeApiResult<Comment>|,
             handler: handle_get_comment
         }
-        get_child_comments: {
-            inputs: |address: String|,
+        get_comments: {
+            inputs: |base: String|,
             outputs: |result: ZomeApiResult<Vec<Comment>>|,
-            handler: handle_get_children
+            handler: handle_get_comments
         }
     ]
 
@@ -60,7 +60,7 @@ define_zome! {
         hc_public [
             create_comment,
             get_comment,
-            get_child_comments
+            get_comments
         ]
     }
 }

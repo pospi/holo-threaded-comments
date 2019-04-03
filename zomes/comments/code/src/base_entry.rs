@@ -36,9 +36,9 @@ pub const COMMENT_LINK_TAG: &str = "commented_on";
 
 // API methods
 
-pub fn handle_get_children(base: String) -> ZomeApiResult<Vec<Comment>> {
+pub fn handle_get_comments(base: String) -> ZomeApiResult<Vec<Comment>> {
     let address = hdk::entry_address(&Entry::App(BASE_ENTRY_TYPE.into(), base.into()))?;
-    get_links_and_load_type::<&str, Comment>(&address, COMMENT_LINK_TAG)
+    get_links_and_load_type(&address, COMMENT_LINK_TAG)
 }
 
 // Entry definition
